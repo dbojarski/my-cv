@@ -1,15 +1,13 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 
-import { AppContainer, GlobalStyles, Meme } from './App.styles';
+import { GlobalStyles } from './App.styles';
 
 function App() {
   return (
     <>
       <GlobalStyles />
-
-      <AppContainer>
-        <Meme src='https://fabrykamemow.pl/uimages/services/fabrykamemow/i18n/pl_PL/201209/1347799555_by_hubi777_500.jpg' />
-      </AppContainer>
+      <Outlet />
     </>
   );
 }

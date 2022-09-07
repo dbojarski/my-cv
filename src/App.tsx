@@ -1,12 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { AppContainer, GlobalStyles, Meme } from './App.styles';
 
 function App() {
   return (
-    <div className='App'>
-      <img src='https://fabrykamemow.pl/uimages/services/fabrykamemow/i18n/pl_PL/201209/1347799555_by_hubi777_500.jpg' />
-    </div>
+    <>
+      <GlobalStyles />
+
+      <AppContainer>
+        <Meme src='https://fabrykamemow.pl/uimages/services/fabrykamemow/i18n/pl_PL/201209/1347799555_by_hubi777_500.jpg' />
+      </AppContainer>
+    </>
   );
 }
 

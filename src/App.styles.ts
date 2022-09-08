@@ -22,7 +22,8 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
   
-  a {
+  a, .link {
+    cursor: pointer;
     text-decoration: none;
     color: ${Colors.gold1};
     

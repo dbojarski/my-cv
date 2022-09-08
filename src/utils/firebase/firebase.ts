@@ -1,10 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  UserCredential,
-} from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,11 +9,4 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-export async function signInWithGoogle(): Promise<UserCredential> {
-  const provider = new GoogleAuthProvider();
-
-  return await signInWithPopup(auth, provider);
-}
+export const firebaseApp = initializeApp(firebaseConfig);

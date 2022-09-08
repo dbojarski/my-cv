@@ -1,8 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
+import { setUser } from '../../state/user/user.reducer';
+import { selectUser } from '../../state/user/user.selector';
+import { signOutFromApp } from '../../utils/firebase/auth';
 import { HeaderContainer, Logo, Menu } from './Header.styles';
 
 export function Header() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const signOut = async () => {
+    await signOutFromApp();
+
+    dispatch(setUser(null));
+  };
+
   return (
     <HeaderContainer>
       <Link to='/'>
@@ -11,7 +23,13 @@ export function Header() {
 
       <Menu>
         <li>
-          <NavLink to='/authentication'>Sign In</NavLink>
+          {user ? (
+            <span className='link' onClick={signOut}>
+              Sign out
+            </span>
+          ) : (
+            <NavLink to='/authentication'>Sign In</NavLink>
+          )}
         </li>
       </Menu>
     </HeaderContainer>

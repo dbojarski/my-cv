@@ -22,7 +22,8 @@ export const Menu = styled.ul`
     display: inline;
   }
 
-  li a {
+  li a,
+  li span {
     padding: 5px 10px;
     text-transform: uppercase;
     border-radius: 4px;

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App';
+import { AuthGuard } from './components/AuthGuard/AuthGuard';
 import { Authentication, Home } from './pages';
 import { store } from './state/store';
 
@@ -16,7 +17,14 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route element={<App />}>
-            <Route path='/' element={<Home />} />
+            <Route
+              path='/'
+              element={
+                <AuthGuard>
+                  <Home />
+                </AuthGuard>
+              }
+            />
             <Route path='/authentication' element={<Authentication />} />
           </Route>
         </Routes>

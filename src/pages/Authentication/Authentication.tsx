@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { Button } from '../../components/Button/Button';
 import { setUser } from '../../state/user/user.reducer';
@@ -8,23 +7,13 @@ import { selectUser } from '../../state/user/user.selector';
 import { signInWithGoogle } from '../../utils/firebase/auth';
 import { LoginFormContainer } from './Authentication.styles';
 
-export function Authentication() {
-  const user = useSelector(selectUser);
-  const navigate = useNavigate();
+function AuthenticationContent() {
   const dispatch = useDispatch();
   const signIn = async () => {
     const { user } = await signInWithGoogle();
 
     dispatch(setUser(user));
   };
-
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-
-    navigate('/');
-  }, [user]);
 
   return (
     <>
@@ -44,4 +33,10 @@ export function Authentication() {
       </LoginFormContainer>
     </>
   );
+}
+
+export function Authentication() {
+  const user = useSelector(selectUser);
+
+  return <>{user ? <Navigate to='/' /> : <AuthenticationContent />}</>;
 }

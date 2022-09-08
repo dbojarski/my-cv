@@ -1,12 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { Colors } from './assets/styles/Common.styles';
+
 export const GlobalStyles = createGlobalStyle`
   body {
-    background-color: #1f1f1f;
+    background-color: #3f3f3f;
+    color: #b7b7b7;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    font-family: 'Raleway', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -14,5 +15,19 @@ export const GlobalStyles = createGlobalStyle`
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  }
+  
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: ${Colors.gold1};
+    
+    &:hover {
+      color: ${Colors.gold2};
+    }
   }
 `;

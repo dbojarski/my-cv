@@ -24,7 +24,7 @@ export const Menu = styled.ul`
 
   li a,
   li span {
-    padding: 5px 10px;
+    padding: 5px 15px;
     text-transform: uppercase;
     border-radius: 4px;
 

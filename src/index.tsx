@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import { AuthGuard } from './components/AuthGuard/AuthGuard';
 import { Authentication, Home } from './pages';
+import { Profile } from './pages/Profile/Profile';
 import store from './store/store';
 
 const root = ReactDOM.createRoot(
@@ -22,6 +23,14 @@ root.render(
               element={
                 <AuthGuard>
                   <Home />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path='/profile'
+              element={
+                <AuthGuard>
+                  <Profile />
                 </AuthGuard>
               }
             />

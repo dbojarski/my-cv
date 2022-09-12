@@ -22,15 +22,20 @@ export function Header() {
       </Link>
 
       <Menu>
-        <li>
-          {user ? (
-            <span className='link' onClick={signOut}>
-              Sign out
-            </span>
-          ) : (
-            <NavLink to='/authentication'>Sign In</NavLink>
-          )}
-        </li>
+        {user ? (
+          <>
+            <li>
+              <NavLink to='/profile'>Profile</NavLink>
+            </li>
+            <li>
+              <span className='link' onClick={signOut}>
+                Sign out
+              </span>
+            </li>
+          </>
+        ) : (
+          <NavLink to='/authentication'>Sign In</NavLink>
+        )}
       </Menu>
     </HeaderContainer>
   );

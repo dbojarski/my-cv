@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 
-import { setUser } from '../../state/user/user.reducer';
-import { selectUser } from '../../state/user/user.selector';
+import { setUser } from '../../store/user/user.reducer';
+import { selectUser } from '../../store/user/user.selector';
 import { signOutFromApp } from '../../utils/firebase/auth';
 import { HeaderContainer, Logo, Menu } from './Header.styles';
 

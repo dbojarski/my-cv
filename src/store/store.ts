@@ -10,6 +10,7 @@ import { rootSaga } from './root.saga';
 const persistConfig: PersistConfig<RootReducerState> = {
   key: 'root',
   storage,
+  blacklist: ['profile'],
 };
 const sagaMiddleware = createSagaMiddleware();
 

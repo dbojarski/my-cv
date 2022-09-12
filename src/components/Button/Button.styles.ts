@@ -9,11 +9,17 @@ export const CustomButton = styled.button`
   outline: none;
   border-radius: 4px;
 
+  &:disabled {
+    background-color: #4f4f4f;
+    color: #929292;
+    cursor: not-allowed;
+  }
+
   &:not(:disabled) {
     cursor: pointer;
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: ${Colors.gold2};
   }
 

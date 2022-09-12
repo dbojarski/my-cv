@@ -31,4 +31,13 @@ export const GlobalStyles = createGlobalStyle`
       color: ${Colors.gold2};
     }
   }
+  
+  input, textarea {
+    background-color: #2f2f2f;
+    border: 1px solid #1f1f1f;
+    color: #b7b7b7;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+  }
 `;

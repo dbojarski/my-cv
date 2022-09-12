@@ -3,32 +3,28 @@ import { User } from 'firebase/auth';
 
 export type UserSliceState = {
   data: User | null;
-  signInPending: boolean;
-  signInError: Error | null;
+  error: Error | null;
 };
 
 const INITIAL_STATE: UserSliceState = {
   data: null,
-  signInPending: false,
-  signInError: null,
+  error: null,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: INITIAL_STATE,
   reducers: {
-    setUser: (state, { payload: data }) => ({
-      ...state,
-      data,
-      signInPending: false,
-    }),
-    signInStart: (state) => ({ ...state, signInPending: true }),
-    signInError: (state, { payload: error }) => ({
-      ...state,
-      signInPending: false,
-      error,
-    }),
+    setUser: (state, { payload: data }) => {
+      state.data = data;
+    },
+    setError: (state, { payload: error }) => {
+      state.error = error;
+    },
+    signInStart: () => {},
+    signOutStart: () => {},
   },
 });
 
-export const { setUser, signInStart, signInError } = userSlice.actions;
+export const { setUser, setError, signInStart, signOutStart } =
+  userSlice.actions;

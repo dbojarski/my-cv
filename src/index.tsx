@@ -6,6 +6,9 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './App';
 import { AuthGuard } from './components/AuthGuard/AuthGuard';
+import { PersonalInformation } from './components/PersonalInformation/PersonalInformation';
+import { Skills } from './components/Skills/Skills';
+import { Pages } from './constants/routes.constants';
 import { Authentication, Home } from './pages';
 import { Profile } from './pages/Profile/Profile';
 import { initStore } from './store/store';
@@ -23,7 +26,7 @@ root.render(
           <Routes>
             <Route element={<App />}>
               <Route
-                path='/'
+                index
                 element={
                   <AuthGuard>
                     <Home />
@@ -31,14 +34,17 @@ root.render(
                 }
               />
               <Route
-                path='/profile'
+                path={Pages.profile}
                 element={
                   <AuthGuard>
                     <Profile />
                   </AuthGuard>
                 }
-              />
-              <Route path='/authentication' element={<Authentication />} />
+              >
+                <Route index element={<PersonalInformation />} />
+                <Route path={Pages.profileSkills} element={<Skills />} />
+              </Route>
+              <Route path={Pages.authentication} element={<Authentication />} />
             </Route>
           </Routes>
         </BrowserRouter>

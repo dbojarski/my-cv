@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { Meme } from './Home.styles';
+import { HomeContainer, Meme } from './Home.styles';
 
 export function Home() {
   return (
-    <Meme src='https://fabrykamemow.pl/uimages/services/fabrykamemow/i18n/pl_PL/201209/1347799555_by_hubi777_500.jpg' />
+    <HomeContainer>
+      <Meme src='https://i1.kwejk.pl/k/obrazki/2011/09/0f0b7071e5e1263f8a91168f25dfe55e.jpg' />
+    </HomeContainer>
   );
 }

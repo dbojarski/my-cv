@@ -1,18 +1,37 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-import { signInWithGoogle } from '../../utils/firebase/auth';
-import { setUser, signInError } from './user.reducer';
+import { signInWithGoogle, signOutFromApp } from '../../utils/firebase/auth';
+import { setError, setUser } from './user.reducer';
 
+// sign in saga
 function* signIn() {
   try {
     const { user } = yield call(signInWithGoogle);
 
     yield put(setUser(user));
   } catch (error) {
-    yield put(signInError(error));
+    yield put(setError(error));
   }
 }
 
-export function* userSaga() {
+export function* onSignIn() {
   yield takeLatest('user/signInStart', signIn);
+}
+
+//sign out saga
+export function* signOut() {
+  try {
+    yield call(signOutFromApp);
+    yield put(setUser(null));
+  } catch (error) {
+    yield put(setError(error));
+  }
+}
+
+export function* onSignOut() {
+  yield takeLatest('user/signOutStart', signOut);
+}
+
+export function* userSaga() {
+  yield all([call(onSignIn), call(onSignOut)]);
 }

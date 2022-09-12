@@ -27,7 +27,7 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
     color: ${Colors.gold1};
     
-    &:hover {
+    &:not(.active):hover {
       color: ${Colors.gold2};
     }
   }

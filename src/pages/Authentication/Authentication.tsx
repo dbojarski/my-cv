@@ -12,19 +12,16 @@ function AuthenticationContent() {
 
   return (
     <>
+      <p>To use every function of this page you have to firstly sign in.</p>
       <p>
-        Żeby korzystać ze wszystkich funkcji strony należy się najpierw
-        zalogować.
-      </p>
-      <p>
-        Po zalogowaniu możesz dodać informacje do swojego profilu, które będą
-        wyświetlone jako wartości domyślne w Twoim CV.
+        After signing in you can add information to your profile which are going
+        to be displayed as default values in your CV.
       </p>
 
       <LoginFormContainer>
-        <h2>Zaloguj się</h2>
+        <h2>Sign in</h2>
 
-        <Button onClick={signIn}>zaloguj się z google</Button>
+        <Button onClick={signIn}>sign in with google</Button>
       </LoginFormContainer>
     </>
   );

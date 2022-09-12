@@ -1,19 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useMatch } from 'react-router-dom';
 
-import { setUser } from '../../store/user/user.reducer';
+import { Pages } from '../../constants/routes.constants';
+import { signOutStart } from '../../store/user/user.reducer';
 import { selectUser } from '../../store/user/user.selector';
-import { signOutFromApp } from '../../utils/firebase/auth';
 import { HeaderContainer, Logo, Menu } from './Header.styles';
 
 export function Header() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const signOut = async () => {
-    await signOutFromApp();
-
-    dispatch(setUser(null));
-  };
+  const signOut = () => dispatch(signOutStart());
+  const profileMatches = useMatch({ path: Pages.profile, end: false });
 
   return (
     <HeaderContainer>
@@ -25,7 +22,12 @@ export function Header() {
         {user ? (
           <>
             <li>
-              <NavLink to='/profile'>Profile</NavLink>
+              <NavLink
+                to={Pages.profile}
+                className={profileMatches ? 'active' : ''}
+              >
+                Profile
+              </NavLink>
             </li>
             <li>
               <span className='link' onClick={signOut}>
@@ -34,7 +36,7 @@ export function Header() {
             </li>
           </>
         ) : (
-          <NavLink to='/authentication'>Sign In</NavLink>
+          <NavLink to={Pages.authentication}>Sign In</NavLink>
         )}
       </Menu>
     </HeaderContainer>

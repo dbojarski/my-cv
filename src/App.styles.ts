@@ -40,4 +40,12 @@ export const GlobalStyles = createGlobalStyle`
     padding: 10px 15px;
     border-radius: 4px;
   }
+  
+  input[type=number]::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
 `;

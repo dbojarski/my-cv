@@ -6,6 +6,10 @@ export const TextFieldContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${Spacing.s10};
+
+  input {
+    max-width: 100%;
+  }
 `;
 
 export const TextFieldError = styled.span`

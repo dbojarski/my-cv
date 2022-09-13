@@ -1,9 +1,22 @@
 import { ButtonHTMLAttributes } from 'react';
 
-import { CustomButton } from './Button.styles';
+import { CustomButton, GhostButton } from './Button.styles';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+export const enum ButtonType {
+  default,
+  ghost,
+}
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  buttonType?: ButtonType;
+  small?: boolean;
+};
 
 export function Button({ children, ...otherProps }: ButtonProps) {
-  return <CustomButton {...otherProps}>{children}</CustomButton>;
+  const ButtonComponent = {
+    [ButtonType.default]: CustomButton,
+    [ButtonType.ghost]: GhostButton,
+  }[otherProps.buttonType || ButtonType.default];
+
+  return <ButtonComponent {...otherProps}>{children}</ButtonComponent>;
 }

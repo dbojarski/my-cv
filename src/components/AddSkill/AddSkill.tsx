@@ -3,45 +3,73 @@ import { MouseEventHandler } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { saveSkill } from '../../store/profile';
+import { editSkill, saveSkill, Skill } from '../../store/profile';
+import { selectSkills } from '../../store/profile/profile.selector';
 import { selectUser } from '../../store/user/user.selector';
 import { Button, ButtonType } from '../Button/Button';
+import { Input } from '../Input/Input';
 import { SkillRate } from '../SkillRate/SkillRate';
-import { TextField } from '../TextField/TextField';
-import { AddSkillActions, AddSkillContainer } from './AddSkill.styles';
+import { AddSkillActions, AddSkillForm } from './AddSkill.styles';
 
 type FormValues = {
   name: string;
-  experienceInMonths: number;
-  rate: number;
+  experienceInMonths: string;
+  rate: string;
 };
 
 type AddSkillProps = {
+  skill?: Skill;
   onCancel: MouseEventHandler<HTMLButtonElement>;
 };
 
 export function AddSkill(props: AddSkillProps) {
+  const defaultValues: FormValues = props.skill || {
+    name: '',
+    experienceInMonths: '',
+    rate: '',
+  };
   const dispatch = useDispatch();
-  const { uid: id } = useSelector(selectUser) as User;
+  const skills = useSelector(selectSkills);
+  const { uid } = useSelector(selectUser) as User;
   const {
     register,
     handleSubmit,
-    formState: { isValid },
-  } = useForm<FormValues>({ mode: 'onChange' });
-  const onSaveSkill = (data: FormValues) =>
-    dispatch(saveSkill({ ...data, id }));
+    formState: { errors, isValid },
+  } = useForm<FormValues>({ defaultValues, mode: 'onChange' });
+
+  const onSaveSkill = (data: FormValues) => {
+    dispatch(
+      props.skill ? editSkill({ ...data, uid }) : saveSkill({ ...data, uid })
+    );
+  };
+
+  const isNameUnique = (name: string) => {
+    const nameIsUnique = !skills.map((skill) => skill.name).includes(name);
+
+    if (props.skill) return;
+    if (!nameIsUnique) return 'Name already in usage';
+  };
 
   return (
-    <AddSkillContainer onSubmit={handleSubmit(onSaveSkill)}>
-      <TextField
-        {...register('name', { required: true })}
+    <AddSkillForm autoComplete='off' onSubmit={handleSubmit(onSaveSkill)}>
+      <Input
+        {...register('name', {
+          required: 'Field is required',
+          validate: isNameUnique,
+        })}
+        error={errors.name}
         placeholder='Skill name'
+        disabled={!!props.skill}
       />
 
-      <input
+      <Input
+        error={errors.experienceInMonths}
         type='number'
         min={1}
-        {...register('experienceInMonths', { required: true, min: 1 })}
+        {...register('experienceInMonths', {
+          required: 'Field is required',
+          min: { value: 1, message: 'Minimal experience value is 1' },
+        })}
         placeholder='Experience in months'
       />
 
@@ -60,6 +88,6 @@ export function AddSkill(props: AddSkillProps) {
           Add
         </Button>
       </AddSkillActions>
-    </AddSkillContainer>
+    </AddSkillForm>
   );
 }

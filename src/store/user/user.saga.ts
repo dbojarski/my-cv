@@ -1,7 +1,7 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { signInWithGoogle, signOutFromApp } from '../../utils/firebase/auth';
-import { setPersonalInformation } from '../profile';
+import { setPersonalInformation, setSkills } from '../profile';
 import { setError, setUser } from './user.reducer';
 
 // sign in saga
@@ -25,6 +25,7 @@ export function* signOut() {
     yield call(signOutFromApp);
     yield put(setUser(null));
     yield put(setPersonalInformation(null));
+    yield put(setSkills([]));
   } catch (error) {
     yield put(setError(error));
   }

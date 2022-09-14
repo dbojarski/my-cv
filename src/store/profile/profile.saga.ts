@@ -33,12 +33,12 @@ function* onFetchSkills() {
 
 //fetch personal information
 function* fetchPersonalInformation({
-  payload: ownerId,
+  payload: uid,
 }: PayloadAction<string>): any {
   try {
-    const response = yield call(getDocument, 'profile', ownerId);
+    const response = yield call(getDocument, 'profile', uid);
 
-    yield put(setPersonalInformation({ ...response, id: ownerId }));
+    yield put(setPersonalInformation({ ...response, uid }));
   } catch (error) {
     yield put(setError(error));
   }
@@ -54,11 +54,11 @@ function* onFetchPersonalInformation() {
 //update personal information
 function* updatePersonalInformation({
   payload,
-}: PayloadAction<PersonalInformation & { id: string }>) {
+}: PayloadAction<PersonalInformation & { uid: string }>) {
   try {
-    const { id, ...personalInformation } = payload;
+    const { uid, ...personalInformation } = payload;
 
-    yield call(setDocument, 'profile', personalInformation, id);
+    yield call(setDocument, 'profile', personalInformation, [uid]);
   } catch (error) {
     yield put(setError(error));
   }
@@ -69,12 +69,12 @@ function* onSetPersonalInformation() {
 }
 
 // adding or editing a skill
-function* saveSkill({ payload }: PayloadAction<Skill & { id: string }>) {
+function* saveSkill({ payload }: PayloadAction<Skill & { uid: string }>) {
   try {
-    const { id, ...skill } = payload;
+    const { uid, ...skill } = payload;
 
-    yield call(setDocument, 'profile', skill, id, ['skills', skill.name]);
-    yield put(fetchSkillsFromReducer(id));
+    yield call(setDocument, 'profile', skill, [uid, 'skills', skill.name]);
+    yield put(fetchSkillsFromReducer(uid));
   } catch (error) {
     yield put(setError(error));
   }
@@ -100,6 +100,22 @@ function* onDeleteSkill() {
   yield takeLatest('profile/deleteSkill', deleteSkill);
 }
 
+//edit skill
+function* editSkill({ payload }: PayloadAction<Skill & { uid: string }>) {
+  try {
+    const { uid, ...skill } = payload;
+
+    yield call(setDocument, 'profile', skill, [uid, 'skills', skill.name]);
+    yield put(fetchSkillsFromReducer(uid));
+  } catch (error) {
+    yield put(setError(error));
+  }
+}
+
+function* onEditSkill() {
+  yield takeLatest('profile/editSkill', editSkill);
+}
+
 export function* profileSaga() {
   yield all([
     call(onSetPersonalInformation),
@@ -107,5 +123,6 @@ export function* profileSaga() {
     call(onSaveSkill),
     call(onFetchSkills),
     call(onDeleteSkill),
+    call(onEditSkill),
   ]);
 }

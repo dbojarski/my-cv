@@ -15,7 +15,7 @@ export const PersonalInformationForm = styled.form`
 
   textarea {
     resize: vertical;
-    min-height: 50px;
+    min-height: 100px;
   }
 `;
 

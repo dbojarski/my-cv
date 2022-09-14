@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AddSkill } from '../../../components/AddSkill/AddSkill';
 import { Button } from '../../../components/Button/Button';
+import { Modal } from '../../../components/Modal/Modal';
 import { SkillBlock } from '../../../components/SkillBlock/SkillBlock';
-import { fetchSkills } from '../../../store/profile';
+import { fetchSkills, Skill } from '../../../store/profile';
 import { selectSkills } from '../../../store/profile/profile.selector';
 import { selectUser } from '../../../store/user/user.selector';
 import {
@@ -18,13 +19,27 @@ export function Skills() {
   const { uid } = useSelector(selectUser) as User;
   const dispatch = useDispatch();
   const skills = useSelector(selectSkills);
-  const [addSkillVisible, setAddSkillVisibility] = useState(false);
+  const [skillFormVisible, setSkillFormVisibility] = useState(false);
+  const [focusedSkill, focusSkill] = useState<Skill>();
 
-  const hideSkillForm = () => setAddSkillVisibility(false);
+  const hideSkillForm = () => {
+    focusSkill(undefined);
+    setSkillFormVisibility(false);
+  };
+
+  const editSkill = (skill: Skill) => {
+    focusSkill(skill);
+    setSkillFormVisibility(true);
+  };
 
   useEffect(() => {
     dispatch(fetchSkills(uid));
   }, []);
+
+  useEffect(() => {
+    setSkillFormVisibility(false);
+    focusSkill(undefined);
+  }, [skills]);
 
   return (
     <SkillsContainer>
@@ -33,22 +48,26 @@ export function Skills() {
         generating CV.
       </SkillsInformationHint>
 
-      <SkillsList>
-        {addSkillVisible && <AddSkill onCancel={hideSkillForm} />}
-
-        {skills.map((skill) => (
-          <SkillBlock skill={skill} key={skill.name} />
-        ))}
-      </SkillsList>
-
       <div>
         <Button
-          disabled={addSkillVisible}
-          onClick={() => setAddSkillVisibility(true)}
+          disabled={skillFormVisible}
+          onClick={() => setSkillFormVisibility(true)}
         >
           Add skill
         </Button>
       </div>
+
+      <SkillsList>
+        {skills.map((skill) => (
+          <SkillBlock skill={skill} key={skill.name} onEdit={editSkill} />
+        ))}
+      </SkillsList>
+
+      {skillFormVisible && (
+        <Modal>
+          <AddSkill skill={focusedSkill} onCancel={hideSkillForm} />
+        </Modal>
+      )}
     </SkillsContainer>
   );
 }

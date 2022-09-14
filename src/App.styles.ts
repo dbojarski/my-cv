@@ -41,8 +41,16 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 4px;
   }
   
+  input:disabled {
+    opacity: .2;
+  }
+  
   input[type=number]::-webkit-inner-spin-button {
     display: none;
+  }
+  
+  input[error] {
+    border-color: ${Colors.red1};
   }
   
   * {

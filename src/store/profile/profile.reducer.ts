@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type PersonalInformation = {
   firstName: string;
@@ -13,7 +13,7 @@ export type Skill = {
 };
 
 export type ProfileState = {
-  personalInformation: PersonalInformation;
+  personalInformation: PersonalInformation | null;
   skills: Skill[];
   pending: boolean;
   error: Error | null;
@@ -34,27 +34,31 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState: INITIAL_STATE,
   reducers: {
-    fetchPersonalInformation: (state: ProfileState, { payload }) => {
+    fetchPersonalInformation: (state, _) => {
       state.pending = true;
     },
-    setPersonalInformation: (state: ProfileState, { payload }) => {
+    setPersonalInformation: (
+      state,
+      { payload }: PayloadAction<(PersonalInformation & { uid: string }) | null>
+    ) => {
       state.personalInformation = payload;
       state.pending = false;
     },
-    fetchSkills: (state: ProfileState, { payload: ownerId }) => {
+    fetchSkills: (state, _) => {
       state.pending = true;
     },
-    setSkills: (state: ProfileState, { payload }) => {
+    setSkills: (state, { payload }: PayloadAction<Skill[]>) => {
       state.skills = payload;
       state.pending = false;
     },
-    saveSkill: (state: ProfileState, { payload }) => {
+    saveSkill: (state, _) => {
       state.pending = true;
     },
-    deleteSkill: (state: ProfileState, { payload }) => {
+    editSkill: (state, _) => {},
+    deleteSkill: (state, _) => {
       state.pending = true;
     },
-    setError: (state: ProfileState, { payload }) => {
+    setError: (state, { payload }) => {
       state.error = payload;
       state.pending = false;
     },
@@ -69,4 +73,5 @@ export const {
   saveSkill,
   setSkills,
   deleteSkill,
+  editSkill,
 } = profileSlice.actions;

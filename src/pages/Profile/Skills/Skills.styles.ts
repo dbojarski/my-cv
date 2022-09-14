@@ -16,4 +16,5 @@ export const SkillsInformationHint = styled.p`
 export const SkillsList = styled.div`
   display: flex;
   gap: ${Spacing.s15};
+  flex-wrap: wrap;
 `;

@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 import { Spacing } from '../../assets/styles/Common.styles';
 
-export const AddSkillContainer = styled.form`
+export const AddSkillForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${Spacing.s15};
   border-radius: 4px;
-  background-color: #2f2f2f;
+  background-color: #3f3f3f;
   padding: 10px;
-  width: 200px;
+  width: 300px;
 `;
 
 export const AddSkillActions = styled.div`

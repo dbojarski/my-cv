@@ -1,4 +1,5 @@
 import { User } from 'firebase/auth';
+import { MouseEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteSkill, Skill } from '../../store/profile';
@@ -18,6 +19,7 @@ type SkillBlockExperienceProps = {
 
 type SkillBlockProps = {
   skill: Skill;
+  onEdit: (skill: Skill) => void;
 };
 
 function SkillBlockExperience({
@@ -35,7 +37,7 @@ function SkillBlockExperience({
   );
 }
 
-export function SkillBlock({ skill }: SkillBlockProps) {
+export function SkillBlock({ skill, onEdit }: SkillBlockProps) {
   const dispatch = useDispatch();
   const { uid } = useSelector(selectUser) as User;
 
@@ -44,9 +46,12 @@ export function SkillBlock({ skill }: SkillBlockProps) {
   return (
     <SkillBlockContainer>
       <SkillBlockHeader>
-        {skill.name}
+        <span title={skill.name}>{skill.name}</span>
         <SkillIconsContainer>
-          <SkillEditIcon title={`Edit ${skill.name} skill`} />
+          <SkillEditIcon
+            title={`Edit ${skill.name} skill`}
+            onClick={() => onEdit(skill)}
+          />
           <SkillDeleteIcon
             title={`Delete ${skill.name} skill`}
             onClick={onDeleteSkill}

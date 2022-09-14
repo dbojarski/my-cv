@@ -16,10 +16,9 @@ const db = getFirestore(firebaseApp);
 export async function setDocument(
   collectionName: string,
   document: any,
-  ownerId: string,
   pathSegments: string[] = []
 ) {
-  return await setDoc(doc(db, collectionName, ownerId, ...pathSegments), {
+  return await setDoc(doc(db, collectionName, ...pathSegments), {
     ...document,
   });
 }

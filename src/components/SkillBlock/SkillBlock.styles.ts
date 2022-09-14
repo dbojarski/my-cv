@@ -37,9 +37,16 @@ export const SkillDeleteIcon = styled(DeleteIcon)`
 export const SkillIconsContainer = styled.div`
   display: flex;
   gap: ${Spacing.s10};
+  margin-left: ${Spacing.s20};
 `;
 
 export const SkillBlockHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;

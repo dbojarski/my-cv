@@ -20,3 +20,9 @@ export const PageWidthGuard = styled.div`
   margin: 0 auto;
   padding: 0 20px;
 `;
+
+export const Container = styled.div`
+  padding: ${Spacing.s10};
+  border-radius: 4px;
+  background-color: #2f2f2f;
+`;

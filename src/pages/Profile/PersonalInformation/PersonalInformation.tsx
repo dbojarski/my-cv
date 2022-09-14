@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../../components/Button/Button';
-import { TextField } from '../../../components/TextField/TextField';
+import { Input } from '../../../components/Input/Input';
 import {
   fetchPersonalInformation,
   setPersonalInformation,
@@ -40,7 +40,7 @@ export function PersonalInformation() {
   });
 
   const updatePersonalInformation = (data: FormValues) => {
-    dispatch(setPersonalInformation({ ...data, id: uid }));
+    dispatch(setPersonalInformation({ ...data, uid }));
   };
 
   useEffect(() => {
@@ -48,6 +48,10 @@ export function PersonalInformation() {
   }, [uid]);
 
   useEffect(() => {
+    if (!personalInformation) {
+      return;
+    }
+
     reset(personalInformation);
   }, [personalInformation]);
 
@@ -59,7 +63,7 @@ export function PersonalInformation() {
       </PersonalInformationHint>
 
       <div>
-        <TextField
+        <Input
           placeholder='Your first name'
           error={errors.firstName}
           {...register('firstName', { required: 'This field is required' })}
@@ -67,7 +71,7 @@ export function PersonalInformation() {
       </div>
 
       <div>
-        <TextField
+        <Input
           placeholder='Your last name'
           error={errors.lastName}
           {...register('lastName', { required: 'This field is required' })}

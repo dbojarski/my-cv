@@ -6,11 +6,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './App';
 import { AuthGuard } from './components/AuthGuard/AuthGuard';
-import { PersonalInformation } from './components/PersonalInformation/PersonalInformation';
-import { Skills } from './components/Skills/Skills';
 import { Pages } from './constants/routes.constants';
 import { Authentication, Home } from './pages';
+import { PersonalInformation } from './pages/Profile/PersonalInformation/PersonalInformation';
 import { Profile } from './pages/Profile/Profile';
+import { Skills } from './pages/Profile/Skills/Skills';
 import { initStore } from './store/store';
 
 const root = ReactDOM.createRoot(

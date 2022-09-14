@@ -1,6 +1,10 @@
+import { User } from 'firebase/auth';
 import { MouseEventHandler } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { saveSkill } from '../../store/profile';
+import { selectUser } from '../../store/user/user.selector';
 import { Button, ButtonType } from '../Button/Button';
 import { SkillRate } from '../SkillRate/SkillRate';
 import { TextField } from '../TextField/TextField';
@@ -8,7 +12,7 @@ import { AddSkillActions, AddSkillContainer } from './AddSkill.styles';
 
 type FormValues = {
   name: string;
-  experience: number;
+  experienceInMonths: number;
   rate: number;
 };
 
@@ -17,18 +21,18 @@ type AddSkillProps = {
 };
 
 export function AddSkill(props: AddSkillProps) {
+  const dispatch = useDispatch();
+  const { uid: id } = useSelector(selectUser) as User;
   const {
     register,
     handleSubmit,
     formState: { isValid },
   } = useForm<FormValues>({ mode: 'onChange' });
-
-  const saveSkill = (data: FormValues) => {
-    // TODO
-  };
+  const onSaveSkill = (data: FormValues) =>
+    dispatch(saveSkill({ ...data, id }));
 
   return (
-    <AddSkillContainer onSubmit={handleSubmit(saveSkill)}>
+    <AddSkillContainer onSubmit={handleSubmit(onSaveSkill)}>
       <TextField
         {...register('name', { required: true })}
         placeholder='Skill name'
@@ -37,7 +41,7 @@ export function AddSkill(props: AddSkillProps) {
       <input
         type='number'
         min={1}
-        {...register('experience', { required: true, min: 1 })}
+        {...register('experienceInMonths', { required: true, min: 1 })}
         placeholder='Experience in months'
       />
 

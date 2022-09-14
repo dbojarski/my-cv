@@ -3,17 +3,17 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Button } from '../../../components/Button/Button';
+import { TextField } from '../../../components/TextField/TextField';
 import {
   fetchPersonalInformation,
   setPersonalInformation,
-} from '../../store/profile';
+} from '../../../store/profile';
 import {
   selectPending,
   selectPersonalInformation,
-} from '../../store/profile/profile.selector';
-import { selectUser } from '../../store/user/user.selector';
-import { Button } from '../Button/Button';
-import { TextField } from '../TextField/TextField';
+} from '../../../store/profile/profile.selector';
+import { selectUser } from '../../../store/user/user.selector';
 import {
   PersonalInformationForm,
   PersonalInformationHint,

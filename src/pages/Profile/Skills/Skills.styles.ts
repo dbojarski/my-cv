@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Spacing } from '../../assets/styles/Common.styles';
+import { Spacing } from '../../../assets/styles/Common.styles';
 
 export const SkillsContainer = styled.div`
   display: flex;
@@ -11,4 +11,9 @@ export const SkillsContainer = styled.div`
 
 export const SkillsInformationHint = styled.p`
   margin: 0;
+`;
+
+export const SkillsList = styled.div`
+  display: flex;
+  gap: ${Spacing.s15};
 `;

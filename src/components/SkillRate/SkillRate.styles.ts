@@ -13,7 +13,7 @@ export const SkillRateBulletsContainer = styled.div`
   margin-top: ${Spacing.s10};
 `;
 
-export const SkillRateBulletLabel = styled.label`
+export const SkillRateBulletLabel = styled.label<{ active?: boolean }>`
   cursor: pointer;
   flex: 1;
   position: relative;
@@ -37,7 +37,7 @@ export const SkillRateBullet = styled.input.attrs({ type: 'radio' })`
     background-color: ${Colors.gold1};
   }
 
-  &:hover ~ label:after {
+  &:not(:disabled):hover ~ label:after {
     border-color: ${Colors.gold1};
   }
 `;

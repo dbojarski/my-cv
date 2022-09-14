@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Spacing } from '../../assets/styles/Common.styles';
+import { Spacing } from '../../../assets/styles/Common.styles';
 
 export const PersonalInformationForm = styled.form`
   display: flex;

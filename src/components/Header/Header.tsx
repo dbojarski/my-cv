@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link, useMatch } from 'react-router-dom';
 
 import { Pages } from '../../constants/routes.constants';
-import { signOutStart } from '../../store/user/user.reducer';
-import { selectUser } from '../../store/user/user.selector';
+import { signOutStart, selectUser } from '../../store/user';
 import { HeaderContainer, Logo, Menu } from './Header.styles';
 
 export function Header() {

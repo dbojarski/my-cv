@@ -5,7 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Experience, saveExperience } from '../../store/profile';
-import { selectUser } from '../../store/user/user.selector';
+import { selectUser } from '../../store/user';
 import { Button, ButtonType } from '../Button/Button';
 import { Datepicker } from '../Datepicker/Datepicker';
 import { Input } from '../Input/Input';

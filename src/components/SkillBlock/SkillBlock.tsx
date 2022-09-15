@@ -1,9 +1,8 @@
 import { User } from 'firebase/auth';
-import { MouseEventHandler } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteSkill, Skill } from '../../store/profile';
-import { selectUser } from '../../store/user/user.selector';
+import { selectUser } from '../../store/user';
 import { SkillRateView } from '../SkillRateView/SkillRateView';
 import {
   SkillBlockContainer,

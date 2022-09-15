@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import { Button } from '../../components/Button/Button';
-import { signInStart } from '../../store/user/user.reducer';
-import { selectUser } from '../../store/user/user.selector';
+import { signInStart, selectUser } from '../../store/user';
 import { LoginFormContainer } from './Authentication.styles';
 
 function AuthenticationContent() {

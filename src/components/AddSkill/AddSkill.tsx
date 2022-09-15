@@ -3,9 +3,8 @@ import { MouseEventHandler } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { editSkill, saveSkill, Skill } from '../../store/profile';
-import { selectSkills } from '../../store/profile/profile.selector';
-import { selectUser } from '../../store/user/user.selector';
+import { editSkill, saveSkill, selectSkills, Skill } from '../../store/profile';
+import { selectUser } from '../../store/user';
 import { Button, ButtonType } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { SkillRate } from '../SkillRate/SkillRate';

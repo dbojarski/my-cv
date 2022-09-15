@@ -8,12 +8,10 @@ import { Input } from '../../../components/Input/Input';
 import {
   fetchPersonalInformation,
   setPersonalInformation,
-} from '../../../store/profile';
-import {
   selectPending,
   selectPersonalInformation,
-} from '../../../store/profile/profile.selector';
-import { selectUser } from '../../../store/user/user.selector';
+} from '../../../store/profile';
+import { selectUser } from '../../../store/user';
 import {
   PersonalInformationForm,
   PersonalInformationHint,

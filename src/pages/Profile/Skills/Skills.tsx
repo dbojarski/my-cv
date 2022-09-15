@@ -6,9 +6,8 @@ import { AddSkill } from '../../../components/AddSkill/AddSkill';
 import { Button } from '../../../components/Button/Button';
 import { Modal } from '../../../components/Modal/Modal';
 import { SkillBlock } from '../../../components/SkillBlock/SkillBlock';
-import { fetchSkills, Skill } from '../../../store/profile';
-import { selectSkills } from '../../../store/profile/profile.selector';
-import { selectUser } from '../../../store/user/user.selector';
+import { fetchSkills, selectSkills, Skill } from '../../../store/profile';
+import { selectUser } from '../../../store/user';
 import {
   SkillsContainer,
   SkillsInformationHint,

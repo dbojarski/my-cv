@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import { ProfileMenu } from '../../components/ProfileMenu/ProfileMenu';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
-import { selectUser } from '../../store/user/user.selector';
+import { selectUser } from '../../store/user';
 import { ProfileContainer } from './Profile.styles';
 
 export function Profile() {

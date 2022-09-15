@@ -1,3 +1,4 @@
+import 'react-datepicker/dist/react-datepicker.css';
 import { createGlobalStyle } from 'styled-components';
 
 import { Colors } from './assets/styles/Common.styles';
@@ -39,6 +40,7 @@ export const GlobalStyles = createGlobalStyle`
     outline: none;
     padding: 10px 15px;
     border-radius: 4px;
+    width: 100%;
   }
   
   input:disabled {

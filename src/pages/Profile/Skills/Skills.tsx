@@ -44,18 +44,18 @@ export function Skills() {
   return (
     <SkillsContainer>
       <SkillsInformationHint>
-        All skills you add will be available to choose from a list when
-        generating CV.
-      </SkillsInformationHint>
+        <p>
+          All skills you add will be available to choose from a list when
+          generating CV.
+        </p>
 
-      <div>
         <Button
           disabled={skillFormVisible}
           onClick={() => setSkillFormVisibility(true)}
         >
           Add skill
         </Button>
-      </div>
+      </SkillsInformationHint>
 
       <SkillsList>
         {skills.map((skill) => (

@@ -6,3 +6,6 @@ export const selectPersonalInformation = (state: RootReducerState) =>
 export const selectPending = (state: RootReducerState) => state.profile.pending;
 
 export const selectSkills = (state: RootReducerState) => state.profile.skills;
+
+export const selectExperiences = (state: RootReducerState) =>
+  state.profile.experiences;

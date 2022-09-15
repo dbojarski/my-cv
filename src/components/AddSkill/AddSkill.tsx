@@ -51,43 +51,48 @@ export function AddSkill(props: AddSkillProps) {
   };
 
   return (
-    <AddSkillForm autoComplete='off' onSubmit={handleSubmit(onSaveSkill)}>
-      <Input
-        {...register('name', {
-          required: 'Field is required',
-          validate: isNameUnique,
-        })}
-        error={errors.name}
-        placeholder='Skill name'
-        disabled={!!props.skill}
-      />
+    <div>
+      <h2>Add skill</h2>
+      <AddSkillForm autoComplete='off' onSubmit={handleSubmit(onSaveSkill)}>
+        <Input
+          {...register('name', {
+            required: 'Field is required',
+            validate: isNameUnique,
+          })}
+          error={errors.name}
+          placeholder='What is the skill name?'
+          label='Skill name'
+          disabled={!!props.skill}
+        />
 
-      <Input
-        error={errors.experienceInMonths}
-        type='number'
-        min={1}
-        {...register('experienceInMonths', {
-          required: 'Field is required',
-          min: { value: 1, message: 'Minimal experience value is 1' },
-        })}
-        placeholder='Experience in months'
-      />
+        <Input
+          error={errors.experienceInMonths}
+          type='number'
+          min={1}
+          {...register('experienceInMonths', {
+            required: 'Field is required',
+            min: { value: 1, message: 'Minimal experience value is 1' },
+          })}
+          placeholder='How long is the experience?'
+          label='Experience in months'
+        />
 
-      <SkillRate {...register('rate')} />
+        <SkillRate {...register('rate')} />
 
-      <AddSkillActions>
-        <Button
-          buttonType={ButtonType.ghost}
-          small
-          type='button'
-          onClick={props.onCancel}
-        >
-          Cancel
-        </Button>
-        <Button type='submit' small disabled={!isValid}>
-          Add
-        </Button>
-      </AddSkillActions>
-    </AddSkillForm>
+        <AddSkillActions>
+          <Button
+            buttonType={ButtonType.ghost}
+            small
+            type='button'
+            onClick={props.onCancel}
+          >
+            Cancel
+          </Button>
+          <Button type='submit' small disabled={!isValid}>
+            Add
+          </Button>
+        </AddSkillActions>
+      </AddSkillForm>
+    </div>
   );
 }

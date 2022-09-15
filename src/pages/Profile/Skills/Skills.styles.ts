@@ -9,12 +9,18 @@ export const SkillsContainer = styled.div`
   margin-bottom: ${Spacing.s15};
 `;
 
-export const SkillsInformationHint = styled.p`
-  margin: 0;
+export const SkillsInformationHint = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+  }
 `;
 
 export const SkillsList = styled.div`
-  display: flex;
-  gap: ${Spacing.s15};
-  flex-wrap: wrap;
+  display: grid;
+  grid-gap: ${Spacing.s25};
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;

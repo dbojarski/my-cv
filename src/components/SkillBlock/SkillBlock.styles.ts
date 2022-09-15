@@ -11,7 +11,6 @@ export const SkillBlockContainer = styled.form`
   border-radius: 4px;
   background-color: #2f2f2f;
   padding: 10px;
-  width: 200px;
 `;
 
 const SkillIcon = css`

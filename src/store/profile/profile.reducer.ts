@@ -12,14 +12,23 @@ export type Skill = {
   rate: string;
 };
 
+export type Experience = {
+  title: string;
+  description: string;
+  from: Date;
+  to: Date;
+};
+
 export type ProfileState = {
   personalInformation: PersonalInformation | null;
   skills: Skill[];
+  experiences: Experience[];
   pending: boolean;
   error: Error | null;
 };
 
 const INITIAL_STATE: ProfileState = {
+  experiences: [],
   personalInformation: {
     firstName: '',
     lastName: '',
@@ -58,6 +67,16 @@ export const profileSlice = createSlice({
     deleteSkill: (state, _) => {
       state.pending = true;
     },
+    fetchExperiences: (state, _) => {
+      state.pending = true;
+    },
+    setExperiences: (state, { payload }: PayloadAction<Experience[]>) => {
+      state.experiences = payload;
+      state.pending = false;
+    },
+    saveExperience: (state, _) => {
+      state.pending = true;
+    },
     setError: (state, { payload }) => {
       state.error = payload;
       state.pending = false;
@@ -74,4 +93,7 @@ export const {
   setSkills,
   deleteSkill,
   editSkill,
+  fetchExperiences,
+  setExperiences,
+  saveExperience,
 } = profileSlice.actions;

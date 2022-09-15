@@ -1,6 +1,7 @@
 import { forwardRef, InputHTMLAttributes, Ref } from 'react';
 import { FieldError } from 'react-hook-form';
 
+import { Label } from '../Label/Label';
 import { InputContainer, InputError } from './Input.styles';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -29,14 +30,13 @@ export const Input = forwardRef(
   (props: InputProps, ref: Ref<HTMLInputElement>) => {
     return (
       <InputContainer>
-        <label>
-          {props.label && <small>{props.label}</small>}
+        <Label text={props.label}>
           {props.type === 'number' ? (
             <InputNumber ref={ref} {...props} />
           ) : (
             <input ref={ref} {...props} />
           )}
-        </label>
+        </Label>
         {props.error && <InputError>{props.error.message}</InputError>}
       </InputContainer>
     );

@@ -15,6 +15,7 @@ import {
   Skill,
 } from './';
 import { fetchSkills as fetchSkillsFromReducer } from './profile.reducer';
+import { experienceSaga } from './sagas/experience.saga';
 
 //fetching all skills
 function* fetchSkills({ payload }: PayloadAction<string>): any {
@@ -124,5 +125,6 @@ export function* profileSaga() {
     call(onFetchSkills),
     call(onDeleteSkill),
     call(onEditSkill),
+    call(experienceSaga),
   ]);
 }

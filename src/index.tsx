@@ -8,6 +8,7 @@ import App from './App';
 import { AuthGuard } from './components/AuthGuard/AuthGuard';
 import { Pages } from './constants/routes.constants';
 import { Authentication, Home } from './pages';
+import { Experience } from './pages/Profile/Experience/Experience';
 import { PersonalInformation } from './pages/Profile/PersonalInformation/PersonalInformation';
 import { Profile } from './pages/Profile/Profile';
 import { Skills } from './pages/Profile/Skills/Skills';
@@ -43,6 +44,10 @@ root.render(
               >
                 <Route index element={<PersonalInformation />} />
                 <Route path={Pages.profileSkills} element={<Skills />} />
+                <Route
+                  path={Pages.profileExperience}
+                  element={<Experience />}
+                />
               </Route>
               <Route path={Pages.authentication} element={<Authentication />} />
             </Route>

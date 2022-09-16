@@ -4,8 +4,9 @@ import { MouseEventHandler } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Experience, saveExperience } from '../../store/profile';
+import { ExperienceItem, saveExperience } from '../../store/profile';
 import { selectUser } from '../../store/user';
+import { convertExperienceToLocal } from '../../utils/experience/experience.utils';
 import { Button, ButtonType } from '../Button/Button';
 import { Datepicker } from '../Datepicker/Datepicker';
 import { Input } from '../Input/Input';
@@ -16,8 +17,16 @@ import {
 } from './AddExperience.styles';
 
 type AddSkillProps = {
-  experience?: Experience;
+  experience?: ExperienceItem;
   onCancel: MouseEventHandler<HTMLButtonElement>;
+};
+
+type FormValues<DateType = Date | null> = Pick<
+  ExperienceItem,
+  'title' | 'description'
+> & {
+  from: DateType;
+  to: DateType;
 };
 
 export function AddExperience(props: AddSkillProps) {
@@ -29,11 +38,14 @@ export function AddExperience(props: AddSkillProps) {
     handleSubmit,
     watch,
     formState: { isValid, errors },
-  } = useForm<Experience>({ mode: 'onChange' });
+  } = useForm<FormValues>({
+    defaultValues: convertExperienceToLocal(props.experience),
+    mode: 'onChange',
+  });
   const [from, to] = watch(['from', 'to']);
 
-  const onAddExperience = (data: Experience) =>
-    dispatch(saveExperience({ ...data, uid }));
+  const onAddExperience = (data: FormValues) =>
+    dispatch(saveExperience({ ...(data as ExperienceItem<Date>), uid }));
 
   return (
     <div>
@@ -46,6 +58,7 @@ export function AddExperience(props: AddSkillProps) {
         <Input
           {...register('title', { required: 'This field is required' })}
           error={errors.title}
+          disabled={!!props.experience}
           label='Title'
           placeholder='Job title, position, project name, anything that defines your experience.'
         />

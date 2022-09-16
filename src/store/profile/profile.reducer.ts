@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Timestamp } from 'firebase/firestore';
 
 export type PersonalInformation = {
   firstName: string;
@@ -12,17 +13,17 @@ export type Skill = {
   rate: string;
 };
 
-export type Experience = {
+export type ExperienceItem<DateType = Timestamp> = {
   title: string;
   description: string;
-  from: Date;
-  to: Date;
+  from: DateType;
+  to: DateType;
 };
 
 export type ProfileState = {
   personalInformation: PersonalInformation | null;
   skills: Skill[];
-  experiences: Experience[];
+  experiences: ExperienceItem[];
   pending: boolean;
   error: Error | null;
 };
@@ -70,11 +71,17 @@ export const profileSlice = createSlice({
     fetchExperiences: (state, _) => {
       state.pending = true;
     },
-    setExperiences: (state, { payload }: PayloadAction<Experience[]>) => {
+    setExperiences: (state, { payload }: PayloadAction<ExperienceItem[]>) => {
       state.experiences = payload;
       state.pending = false;
     },
-    saveExperience: (state, _) => {
+    saveExperience: (
+      state,
+      _: PayloadAction<ExperienceItem<Date> & { uid: string }>
+    ) => {
+      state.pending = true;
+    },
+    deleteExperience: (state, _) => {
       state.pending = true;
     },
     setError: (state, { payload }) => {
@@ -96,4 +103,5 @@ export const {
   fetchExperiences,
   setExperiences,
   saveExperience,
+  deleteExperience,
 } = profileSlice.actions;

@@ -25,18 +25,23 @@ export const ExperienceInformationHint = styled.div`
   }
 `;
 
-export const ExperienceItems = styled.div`
+export const ExperienceList = styled.div`
   display: flex;
   gap: ${Spacing.s15};
 `;
 
-export const ExperienceDescription = styled(Container)`
+export const ExperienceDescription = styled.div``;
+
+export const ExperienceDetails = styled(Container)`
+  display: grid;
+  grid-template-columns: 1fr auto;
   background-color: #1f1f1f;
   height: fit-content;
   flex: 1;
+  grid-gap: ${Spacing.s15};
 `;
 
-export const ExperienceItem = styled(Container)`
+export const ExperienceListItem = styled(Container)`
   cursor: pointer;
   width: 300px;
 
@@ -51,17 +56,6 @@ export const ExperienceItem = styled(Container)`
   &:not(.active):hover {
     color: ${Colors.gold2};
   }
-`;
-
-export const ExperienceItemHeader = styled.div`
-  display: grid;
-  grid-template-columns: 1fr auto;
-  background-color: #2f2f2f;
-  padding: ${Spacing.s10} ${Spacing.s15};
-`;
-
-export const ExperienceItemDescription = styled.div`
-  padding: ${Spacing.s10} ${Spacing.s15};
 `;
 
 const SkillIcon = css`

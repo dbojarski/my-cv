@@ -4,7 +4,11 @@ import { MouseEventHandler } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ExperienceItem, saveExperience } from '../../store/profile';
+import {
+  ExperienceItem,
+  saveExperience,
+  selectExperiences,
+} from '../../store/profile';
 import { selectUser } from '../../store/user';
 import { convertExperienceToLocal } from '../../utils/experience/experience.utils';
 import { Button, ButtonType } from '../Button/Button';
@@ -30,6 +34,7 @@ type FormValues<DateType = Date | null> = Pick<
 };
 
 export function AddExperience(props: AddSkillProps) {
+  const experiences = useSelector(selectExperiences);
   const { uid } = useSelector(selectUser) as User;
   const dispatch = useDispatch();
   const {
@@ -47,6 +52,15 @@ export function AddExperience(props: AddSkillProps) {
   const onAddExperience = (data: FormValues) =>
     dispatch(saveExperience({ ...(data as ExperienceItem<Date>), uid }));
 
+  const isExperienceNameUnique = (name: string) => {
+    const experienceIsUnique = !experiences
+      .map((experience) => experience.title)
+      .includes(name);
+
+    if (props.experience) return;
+    if (!experienceIsUnique) return 'Title already in usage';
+  };
+
   return (
     <div>
       <h2>Add experience</h2>
@@ -56,7 +70,10 @@ export function AddExperience(props: AddSkillProps) {
         onSubmit={handleSubmit(onAddExperience)}
       >
         <Input
-          {...register('title', { required: 'This field is required' })}
+          {...register('title', {
+            required: 'This field is required',
+            validate: isExperienceNameUnique,
+          })}
           error={errors.title}
           disabled={!!props.experience}
           label='Title'

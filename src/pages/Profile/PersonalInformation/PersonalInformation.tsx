@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../../components/Button/Button';
 import { Input } from '../../../components/Input/Input';
+import { Spinner } from '../../../components/Spinner/Spinner';
 import {
   fetchPersonalInformation,
   setPersonalInformation,
@@ -36,6 +37,7 @@ export function PersonalInformation() {
   } = useForm<FormValues>({
     mode: 'onChange',
   });
+  const pending = useSelector(selectPending);
 
   const updatePersonalInformation = (data: FormValues) => {
     dispatch(setPersonalInformation({ ...data, uid }));
@@ -52,6 +54,8 @@ export function PersonalInformation() {
 
     reset(personalInformation);
   }, [personalInformation]);
+
+  if (pending) return <Spinner position='center' />;
 
   return (
     <PersonalInformationForm onSubmit={handleSubmit(updatePersonalInformation)}>

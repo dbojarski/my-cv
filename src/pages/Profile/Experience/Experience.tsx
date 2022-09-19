@@ -6,12 +6,14 @@ import { AddExperience } from '../../../components/AddExperience/AddExperience';
 import { Button } from '../../../components/Button/Button';
 import { Date } from '../../../components/Date/Date';
 import { Modal } from '../../../components/Modal/Modal';
+import { Spinner } from '../../../components/Spinner/Spinner';
 import { MONTH_YEAR } from '../../../constants/date.constants';
 import {
   deleteExperience,
   ExperienceItem,
   fetchExperiences,
   selectExperiences,
+  selectPending,
 } from '../../../store/profile';
 import { selectUser } from '../../../store/user';
 import {
@@ -33,6 +35,7 @@ export function Experience() {
   const experiences = useSelector(selectExperiences);
   const [activeExperience, setActiveExperience] = useState<ExperienceItem>();
   const [editMode, setEditMode] = useState(false);
+  const pending = useSelector(selectPending);
 
   const onDeleteExperience = () =>
     dispatch(deleteExperience({ ...activeExperience, uid }));
@@ -59,6 +62,8 @@ export function Experience() {
     setExperienceFormVisibility(false);
     setActiveExperience(experienceToSelect);
   }, [experiences]);
+
+  if (pending) return <Spinner position='center' />;
 
   return (
     <ExperienceContainer>

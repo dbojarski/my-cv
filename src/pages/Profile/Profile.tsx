@@ -14,6 +14,7 @@ export function Profile() {
     <ProfileContainer>
       <UserInfo displayName={displayName} email={email} photoURL={photoURL} />
       <ProfileMenu />
+
       <Outlet />
     </ProfileContainer>
   );

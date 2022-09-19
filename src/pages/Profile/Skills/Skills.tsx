@@ -6,7 +6,13 @@ import { AddSkill } from '../../../components/AddSkill/AddSkill';
 import { Button } from '../../../components/Button/Button';
 import { Modal } from '../../../components/Modal/Modal';
 import { SkillBlock } from '../../../components/SkillBlock/SkillBlock';
-import { fetchSkills, selectSkills, Skill } from '../../../store/profile';
+import { Spinner } from '../../../components/Spinner/Spinner';
+import {
+  fetchSkills,
+  selectPending,
+  selectSkills,
+  Skill,
+} from '../../../store/profile';
 import { selectUser } from '../../../store/user';
 import {
   SkillsContainer,
@@ -20,6 +26,7 @@ export function Skills() {
   const skills = useSelector(selectSkills);
   const [skillFormVisible, setSkillFormVisibility] = useState(false);
   const [focusedSkill, focusSkill] = useState<Skill>();
+  const pending = useSelector(selectPending);
 
   const hideSkillForm = () => {
     focusSkill(undefined);
@@ -39,6 +46,8 @@ export function Skills() {
     setSkillFormVisibility(false);
     focusSkill(undefined);
   }, [skills]);
+
+  if (pending) return <Spinner position='center' />;
 
   return (
     <SkillsContainer>

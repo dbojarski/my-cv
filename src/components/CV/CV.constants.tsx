@@ -1,7 +1,7 @@
 import {
-  Document as XDocument,
+  Document,
   Image,
-  Page as XPage,
+  Page,
   StyleSheet,
   Text,
   View,
@@ -27,12 +27,9 @@ export const CVStyles = StyleSheet.create({
     paddingHorizontal: 35,
     fontFamily: 'Roboto',
   },
-  x: {
+  personal: {
     display: 'flex',
     flexDirection: 'row',
-  },
-  y: {
-    display: 'flex',
   },
   title: {
     marginLeft: 12,
@@ -60,15 +57,6 @@ export const CVStyles = StyleSheet.create({
     width: 150,
     marginRight: 12,
   },
-  pageNumber: {
-    position: 'absolute',
-    fontSize: 12,
-    bottom: 30,
-    left: 0,
-    right: 0,
-    textAlign: 'center',
-    color: 'grey',
-  },
 });
 
 type CVTemplateParams = {
@@ -85,9 +73,9 @@ export const CVTemplate = ({
   skills,
 }: CVTemplateParams) => {
   return (
-    <XDocument>
-      <XPage style={CVStyles.body}>
-        <View style={CVStyles.x}>
+    <Document>
+      <Page style={CVStyles.body}>
+        <View style={CVStyles.personal}>
           <Image src={user.photoURL as string} style={CVStyles.image} />
 
           <View>
@@ -183,7 +171,7 @@ export const CVTemplate = ({
             <Text> </Text>
           )}
         </View>
-      </XPage>
-    </XDocument>
+      </Page>
+    </Document>
   );
 };

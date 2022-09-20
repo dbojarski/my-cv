@@ -72,14 +72,6 @@ export function CV({ pdf }: CVProps) {
         >
           Next
         </Button>
-
-        {/*<Button small buttonType={ButtonType.ghost} onClick={refreshPDF}>*/}
-        {/*  Refresh preview*/}
-        {/*</Button>*/}
-
-        {/*<a href={pdf.url as string} download='generated-cv'>*/}
-        {/*  Download CV*/}
-        {/*</a>*/}
       </PDFActions>
 
       <Document

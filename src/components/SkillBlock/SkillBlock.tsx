@@ -21,7 +21,7 @@ type SkillBlockProps = {
   onEdit: (skill: Skill) => void;
 };
 
-function SkillBlockExperience({
+export function SkillBlockExperience({
   experienceInMonths,
 }: SkillBlockExperienceProps) {
   const experience = Number(experienceInMonths);

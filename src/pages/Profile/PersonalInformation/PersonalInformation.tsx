@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../../components/Button/Button';
 import { Input } from '../../../components/Input/Input';
+import { Label } from '../../../components/Label/Label';
 import { Spinner } from '../../../components/Spinner/Spinner';
 import {
   fetchPersonalInformation,
@@ -64,25 +65,23 @@ export function PersonalInformation() {
         generating your CV.
       </PersonalInformationHint>
 
-      <div>
-        <Input
-          placeholder='Your first name'
-          error={errors.firstName}
-          {...register('firstName', { required: 'This field is required' })}
-        />
-      </div>
+      <Input
+        label='First name'
+        placeholder='Your first name'
+        error={errors.firstName}
+        {...register('firstName', { required: 'This field is required' })}
+      />
 
-      <div>
-        <Input
-          placeholder='Your last name'
-          error={errors.lastName}
-          {...register('lastName', { required: 'This field is required' })}
-        />
-      </div>
+      <Input
+        label='Last name'
+        placeholder='Your last name'
+        error={errors.lastName}
+        {...register('lastName', { required: 'This field is required' })}
+      />
 
-      <div>
+      <Label text='About me'>
         <textarea placeholder='Describe yourself' {...register('aboutMe')} />
-      </div>
+      </Label>
 
       <div>
         <Button disabled={!isValid || savePending} type='submit'>

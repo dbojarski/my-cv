@@ -14,6 +14,7 @@ import { convertExperienceToLocal } from '../../utils/experience/experience.util
 import { Button, ButtonType } from '../Button/Button';
 import { Datepicker } from '../Datepicker/Datepicker';
 import { Input } from '../Input/Input';
+import { Label } from '../Label/Label';
 import {
   AddExperienceActions,
   AddExperienceDates,
@@ -80,10 +81,12 @@ export function AddExperience(props: AddSkillProps) {
           placeholder='Job title, position, project name, anything that defines your experience.'
         />
 
-        <textarea
-          {...register('description')}
-          placeholder='Describe your experience, your responsibilities etc.'
-        />
+        <Label text='Description'>
+          <textarea
+            {...register('description')}
+            placeholder='Describe your experience, your responsibilities etc.'
+          />
+        </Label>
 
         <AddExperienceDates>
           <div>

@@ -7,9 +7,9 @@ type DateProps = {
 };
 
 export function Date({ timestamp, format = DateTime.DATE_SHORT }: DateProps) {
-  const finalDate = DateTime.fromSeconds(timestamp.seconds).toLocaleString(
-    format
-  );
+  const finalDate = DateTime.fromSeconds(timestamp.seconds, {
+    locale: 'en',
+  }).toLocaleString(format);
 
   return <>{finalDate}</>;
 }

@@ -13,6 +13,7 @@ const rotate = keyframes`
 `;
 
 export const SpinnerContainer = styled.div`
+  width: fit-content;
   display: flex;
   align-items: center;
   gap: ${Spacing.s15};

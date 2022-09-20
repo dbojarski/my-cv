@@ -8,11 +8,6 @@ export const PersonalInformationForm = styled.form`
   gap: ${Spacing.s15};
   margin-bottom: ${Spacing.s15};
 
-  input,
-  textarea {
-    width: 60%;
-  }
-
   textarea {
     resize: vertical;
     min-height: 100px;

@@ -48,4 +48,8 @@ export const GhostButton = styled(CustomButton)`
     background-color: transparent;
     color: ${Colors.gold2};
   }
+
+  &:focus {
+    background-color: transparent;
+  }
 `;

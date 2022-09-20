@@ -6,12 +6,6 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${Spacing.s10};
-
-  label small {
-    background-color: #1f1f1f;
-    border-radius: 4px;
-    padding: 5px 10px;
-  }
 `;
 
 export const InputError = styled.span`

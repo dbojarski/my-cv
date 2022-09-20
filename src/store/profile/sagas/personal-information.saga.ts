@@ -3,9 +3,10 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import { getDocument, setDocument } from '../../../utils/firebase/firestore';
 import {
-  PersonalInformation,
+  Personal,
   setError,
   setPersonalInformation,
+  fetchPersonalInformation as fetchPersonalInformationFromReducer,
 } from '../profile.reducer';
 
 function* fetchPersonalInformation({
@@ -29,18 +30,22 @@ function* onFetchPersonalInformation() {
 
 function* updatePersonalInformation({
   payload,
-}: PayloadAction<PersonalInformation & { uid: string }>) {
+}: PayloadAction<Personal & { uid: string }>) {
   try {
     const { uid, ...personalInformation } = payload;
 
     yield call(setDocument, 'profile', personalInformation, [uid]);
+    yield put(fetchPersonalInformationFromReducer(uid));
   } catch (error) {
     yield put(setError(error));
   }
 }
 
 function* onSetPersonalInformation() {
-  yield takeLatest('profile/setPersonalInformation', updatePersonalInformation);
+  yield takeLatest(
+    'profile/updatePersonalInformation',
+    updatePersonalInformation
+  );
 }
 
 export function* personalInformationSaga() {

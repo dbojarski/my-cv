@@ -17,3 +17,13 @@ export const PersonalInformationForm = styled.form`
 export const PersonalInformationHint = styled.p`
   margin: 0;
 `;
+
+export const PersonalInfoFields = styled.div`
+  display: grid;
+  grid-gap: ${Spacing.s15};
+  grid-template-columns: 1fr 1fr;
+`;
+
+export const AboutMe = styled.div`
+  grid-column: 1 / -1;
+`;

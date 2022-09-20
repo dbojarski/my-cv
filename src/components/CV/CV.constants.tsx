@@ -10,11 +10,7 @@ import { User } from 'firebase/auth';
 import React from 'react';
 
 import { MONTH_YEAR } from '../../constants/date.constants';
-import {
-  ExperienceItem,
-  PersonalInformation,
-  Skill,
-} from '../../store/profile';
+import { ExperienceItem, Personal, Skill } from '../../store/profile';
 import { Date } from '../Date/Date';
 
 export const CVStyles = StyleSheet.create({
@@ -77,7 +73,7 @@ export const CVStyles = StyleSheet.create({
 
 type CVTemplateParams = {
   experience: ExperienceItem[];
-  personal: PersonalInformation;
+  personal: Personal;
   skills: Skill[];
   user: User;
 };
@@ -101,15 +97,21 @@ export const CVTemplate = ({
 
             <View>
               <Text style={CVStyles.text}>E-mail: {user.email}</Text>
-              <Text style={CVStyles.text}>Phone: ---</Text>
+              <Text style={CVStyles.text}>Phone: {personal.phoneNumber}</Text>
+
+              {personal.address && (
+                <Text style={CVStyles.text}>Address: {personal.address}</Text>
+              )}
             </View>
           </View>
         </View>
 
-        <View>
-          <Text style={CVStyles.subtitle}>About me</Text>
-          <Text style={CVStyles.text}>{personal.aboutMe}</Text>
-        </View>
+        {personal.aboutMe && (
+          <View>
+            <Text style={CVStyles.subtitle}>About me</Text>
+            <Text style={CVStyles.text}>{personal.aboutMe}</Text>
+          </View>
+        )}
 
         <View>
           {skills.length ? (

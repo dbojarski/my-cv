@@ -33,12 +33,14 @@ export const SelectListItem = styled.li`
   }
 `;
 
-export const SelectInput = styled.div`
+export const SelectInput = styled.div<{ disabled?: boolean }>`
   ${InputLook};
   cursor: pointer;
   display: flex;
   gap: ${Spacing.s15};
   height: 41px;
+
+  ${({ disabled }) => disabled && { cursor: 'not-allowed', opacity: 0.2 }}
 
   span {
     white-space: nowrap;

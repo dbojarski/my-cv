@@ -9,21 +9,18 @@ import { Label } from '../../../components/Label/Label';
 import { Spinner } from '../../../components/Spinner/Spinner';
 import {
   fetchPersonalInformation,
-  setPersonalInformation,
+  Personal,
   selectPending,
   selectPersonalInformation,
+  updatePersonalInformation,
 } from '../../../store/profile';
 import { selectUser } from '../../../store/user';
 import {
+  AboutMe,
+  PersonalInfoFields,
   PersonalInformationForm,
   PersonalInformationHint,
 } from './PersonalInformation.styles';
-
-type FormValues = {
-  firstName: string;
-  lastName: string;
-  aboutMe: string;
-};
 
 export function PersonalInformation() {
   const dispatch = useDispatch();
@@ -35,13 +32,13 @@ export function PersonalInformation() {
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm<FormValues>({
+  } = useForm<Personal>({
     mode: 'onChange',
   });
   const pending = useSelector(selectPending);
 
-  const updatePersonalInformation = (data: FormValues) => {
-    dispatch(setPersonalInformation({ ...data, uid }));
+  const onSavePersonalInformation = (data: Personal) => {
+    dispatch(updatePersonalInformation({ ...data, uid }));
   };
 
   useEffect(() => {
@@ -59,29 +56,50 @@ export function PersonalInformation() {
   if (pending) return <Spinner position='center' />;
 
   return (
-    <PersonalInformationForm onSubmit={handleSubmit(updatePersonalInformation)}>
+    <PersonalInformationForm onSubmit={handleSubmit(onSavePersonalInformation)}>
       <PersonalInformationHint>
         Your personal information is going to be used as a default value when
         generating your CV.
       </PersonalInformationHint>
 
-      <Input
-        label='First name'
-        placeholder='Your first name'
-        error={errors.firstName}
-        {...register('firstName', { required: 'This field is required' })}
-      />
+      <PersonalInfoFields>
+        <Input
+          label='First name'
+          placeholder='Your first name'
+          error={errors.firstName}
+          {...register('firstName', { required: 'This field is required' })}
+        />
 
-      <Input
-        label='Last name'
-        placeholder='Your last name'
-        error={errors.lastName}
-        {...register('lastName', { required: 'This field is required' })}
-      />
+        <Input
+          label='Last name'
+          placeholder='Your last name'
+          error={errors.lastName}
+          {...register('lastName', { required: 'This field is required' })}
+        />
 
-      <Label text='About me'>
-        <textarea placeholder='Describe yourself' {...register('aboutMe')} />
-      </Label>
+        <Input
+          label='Phone number'
+          placeholder='Contact phone number'
+          error={errors.phoneNumber}
+          {...register('phoneNumber', { required: 'This field is required' })}
+        />
+
+        <Input
+          label='Address'
+          placeholder='Full address'
+          error={errors.address}
+          {...register('address')}
+        />
+
+        <AboutMe>
+          <Label text='About me'>
+            <textarea
+              placeholder='Describe yourself'
+              {...register('aboutMe')}
+            />
+          </Label>
+        </AboutMe>
+      </PersonalInfoFields>
 
       <div>
         <Button disabled={!isValid || savePending} type='submit'>

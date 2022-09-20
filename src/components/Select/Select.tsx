@@ -16,9 +16,10 @@ export type SelectItem = {
 };
 
 type SelectProps = {
+  disabled?: boolean;
   items: { text: string; value?: any }[];
-  text?: string;
   onChange: (skillNames: string[]) => void;
+  text?: string;
 };
 
 export function Select(props: SelectProps) {
@@ -52,7 +53,7 @@ export function Select(props: SelectProps) {
       <Input ref={inputRef} hidden />
 
       <Label text={props.text}>
-        <SelectInput onClick={toggleSelect}>
+        <SelectInput disabled={props.disabled} onClick={toggleSelect}>
           <span title={selectedItems.join(', ')}>
             {selectedItems.join(', ')}
           </span>

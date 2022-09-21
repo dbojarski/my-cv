@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Spacing } from '../../../assets/styles/Common.styles';
+import { MediaMaxSize, Spacing } from '../../../assets/styles/Common.styles';
 
 export const PersonalInformationForm = styled.form`
   display: flex;
@@ -22,6 +22,10 @@ export const PersonalInfoFields = styled.div`
   display: grid;
   grid-gap: ${Spacing.s15};
   grid-template-columns: 1fr 1fr;
+
+  @media (max-width: ${MediaMaxSize.mobile}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const AboutMe = styled.div`

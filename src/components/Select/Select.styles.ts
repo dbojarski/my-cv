@@ -46,6 +46,10 @@ export const SelectInput = styled.div<{ disabled?: boolean }>`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &.select-placeholder {
+      color: #5f5f5f;
+    }
   }
 `;
 

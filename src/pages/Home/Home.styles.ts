@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Spacing } from '../../assets/styles/Common.styles';
+import { MediaMaxSize, Spacing } from '../../assets/styles/Common.styles';
 
 export const HomeContainer = styled.div`
   display: grid;
@@ -8,8 +8,10 @@ export const HomeContainer = styled.div`
   align-items: start;
   grid-gap: ${Spacing.s25};
   grid-template-columns: minmax(0, 0.5fr) minmax(0, 1fr);
-  //max-height: calc(100vh - 145px);
-  //overflow: hidden;
+
+  @media (max-width: ${MediaMaxSize.tablet}) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 `;
 
 export const CVActions = styled.div`
@@ -22,9 +24,12 @@ export const CVWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${Spacing.s15};
-  border-left: 1px solid #4f4f4f;
-  padding-left: ${Spacing.s25};
   min-height: calc(100vh - 135px);
+
+  @media (min-width: ${MediaMaxSize.tablet}) {
+    border-left: 1px solid #4f4f4f;
+    padding-left: ${Spacing.s25};
+  }
 `;
 
 export const CVButtons = styled.div`

@@ -20,6 +20,7 @@ type SelectProps = {
   items: { text: string; value?: any }[];
   onChange: (skillNames: string[]) => void;
   text?: string;
+  placeholder?: string;
 };
 
 export function Select(props: SelectProps) {
@@ -54,9 +55,13 @@ export function Select(props: SelectProps) {
 
       <Label text={props.text}>
         <SelectInput disabled={props.disabled} onClick={toggleSelect}>
-          <span title={selectedItems.join(', ')}>
-            {selectedItems.join(', ')}
+          <span
+            title={selectedItems.join(', ')}
+            className={!selectedItems.length ? 'select-placeholder' : ''}
+          >
+            {selectedItems.join(', ') || props.placeholder}
           </span>
+
           <ToggleIcon className={isOpen ? 'select-open' : ''} />
         </SelectInput>
       </Label>

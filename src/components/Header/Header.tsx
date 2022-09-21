@@ -14,7 +14,7 @@ export function Header() {
   return (
     <HeaderContainer>
       <Link to='/'>
-        <Logo>generate your CV</Logo>
+        <Logo>CV Maker</Logo>
       </Link>
 
       <Menu>

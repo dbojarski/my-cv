@@ -105,6 +105,7 @@ export default function Home() {
 
           <Select
             text='Skills'
+            placeholder='Choose skills'
             items={skillsOptions}
             onChange={filterSkills}
             disabled={!skillsOptions.length}
@@ -119,6 +120,7 @@ export default function Home() {
 
           <Select
             text='Experience'
+            placeholder='Choose experience'
             items={experienceOptions}
             onChange={filterExperience}
             disabled={!experienceOptions.length}
@@ -142,9 +144,7 @@ export default function Home() {
         </CVActions>
       </div>
 
-      <CVWrapper>
-        <CV pdf={pdf} />
-      </CVWrapper>
+      <CVWrapper>{<CV pdf={pdf} />}</CVWrapper>
     </HomeContainer>
   );
 }

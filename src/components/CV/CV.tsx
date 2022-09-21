@@ -1,5 +1,5 @@
 import ReactPDF, { Font } from '@react-pdf/renderer';
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 
 import { Button, ButtonType } from '../Button/Button';
@@ -35,6 +35,8 @@ type CVProps = {
 export const CV = memo(({ pdf }: CVProps) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageTotal, setPageTotal] = useState(0);
+  const [pdfWrapperRef, setPdfWrapperRef] = useState<HTMLDivElement>();
+  const [pdfWidth, setPdfWidth] = useState(0);
 
   const goToPreviousPage = useCallback(() => {
     if (pageNumber === 1) return;
@@ -46,10 +48,28 @@ export const CV = memo(({ pdf }: CVProps) => {
     if (pageNumber === pageTotal) return;
 
     setPageNumber(pageNumber + 1);
-  }, [pageNumber]);
+  }, [pageTotal, pageNumber]);
+
+  useEffect(() => {
+    if (!pdfWrapperRef) return;
+
+    setPdfWidth(pdfWrapperRef.getBoundingClientRect().width);
+  }, [pdfWrapperRef]);
+
+  useEffect(() => {
+    const resizeListener = () => {
+      if (!pdfWrapperRef) return;
+
+      setPdfWidth(pdfWrapperRef.getBoundingClientRect().width);
+    };
+
+    window.addEventListener('resize', resizeListener);
+
+    return () => window.removeEventListener('resize', resizeListener);
+  }, [pdfWrapperRef]);
 
   return (
-    <CVContainer>
+    <CVContainer ref={(ref) => setPdfWrapperRef(ref as HTMLDivElement)}>
       <PDFActions>
         <small>
           Page {pageNumber} / {pageTotal || '-'}
@@ -79,7 +99,7 @@ export const CV = memo(({ pdf }: CVProps) => {
         file={pdf.url}
         onLoadSuccess={(settings) => setPageTotal(settings.numPages)}
       >
-        <Page pageNumber={pageNumber} renderMode='svg' />
+        <Page width={pdfWidth} pageNumber={pageNumber} renderMode='svg' />
       </Document>
     </CVContainer>
   );

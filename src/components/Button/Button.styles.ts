@@ -11,6 +11,7 @@ export const CustomButton = styled.button<
   border: 0;
   outline: none;
   border-radius: 4px;
+  white-space: nowrap;
 
   ${({ small }) =>
     small

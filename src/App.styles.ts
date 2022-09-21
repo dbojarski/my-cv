@@ -33,6 +33,14 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
   
+  input {
+      height: 41px;
+  }
+  
+  input::placeholder, textarea::placeholder {
+      color: #5f5f5f;
+  }
+  
   input, textarea {
     ${InputLook};
   }

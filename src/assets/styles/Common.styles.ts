@@ -14,6 +14,11 @@ export enum Spacing {
   s25 = '20px',
 }
 
+export enum MediaMaxSize {
+  mobile = '600px',
+  tablet = '800px',
+}
+
 export const PageWidthGuard = styled.div`
   max-width: 1200px;
   width: 100%;
@@ -35,4 +40,5 @@ export const InputLook = css`
   padding: 10px 15px;
   border-radius: 0 4px 4px 4px;
   width: 100%;
+  font-size: 1rem;
 `;

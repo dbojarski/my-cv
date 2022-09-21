@@ -5,6 +5,7 @@ import { ReactComponent as DeleteIcon } from '../../../assets/images/trash-can-a
 import {
   Colors,
   Container,
+  MediaMaxSize,
   Spacing,
 } from '../../../assets/styles/Common.styles';
 
@@ -19,6 +20,7 @@ export const ExperienceInformationHint = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: ${Spacing.s15};
 
   p {
     margin: 0;
@@ -28,6 +30,10 @@ export const ExperienceInformationHint = styled.div`
 export const ExperienceList = styled.div`
   display: flex;
   gap: ${Spacing.s15};
+
+  @media (max-width: ${MediaMaxSize.tablet}) {
+    flex-direction: column-reverse;
+  }
 `;
 
 export const ExperienceDescription = styled.div``;
@@ -55,6 +61,10 @@ export const ExperienceListItem = styled(Container)`
 
   &:not(.active):hover {
     color: ${Colors.gold2};
+  }
+
+  @media (max-width: ${MediaMaxSize.tablet}) {
+    width: 100%;
   }
 `;
 

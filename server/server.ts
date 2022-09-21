@@ -6,6 +6,10 @@ const port = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, '/../../build')));
 
+app.use((req, res, next) => {
+  req.secure ? next() : res.redirect(`https://${req.hostname}/${req.url}`);
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../../build/index.html'));
 });

@@ -7,6 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import { AuthGuard } from './components/AuthGuard/AuthGuard';
 import { Pages } from './constants/routes.constants';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { initStore } from './store/store';
 
 const Authentication = lazy(
@@ -93,3 +94,4 @@ root.render(
     </PersistGate>
   </Provider>
 );
+serviceWorkerRegistration.register();

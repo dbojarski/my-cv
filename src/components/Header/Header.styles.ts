@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { MediaMaxSize, Spacing } from '../../assets/styles/Common.styles';
+
 export const HeaderContainer = styled.div`
   height: 100px;
   display: flex;
@@ -7,6 +9,14 @@ export const HeaderContainer = styled.div`
   font-family: 'Raleway', sans-serif;
   margin-bottom: 30px;
   border-bottom: 1px solid #4f4f4f;
+
+  @media (max-width: ${MediaMaxSize.mobile}) {
+    flex-direction: column;
+    justify-content: center;
+    padding: ${Spacing.s15} 0;
+    gap: ${Spacing.s15} 0;
+    height: auto;
+  }
 `;
 
 export const Logo = styled.span`
@@ -31,5 +41,9 @@ export const Menu = styled.ul`
     &.active {
       background-color: #2f2f2f;
     }
+  }
+
+  @media (max-width: ${MediaMaxSize.mobile}) {
+    margin: 0 auto;
   }
 `;

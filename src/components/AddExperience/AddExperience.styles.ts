@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-import { Spacing } from '../../assets/styles/Common.styles';
+import { MediaMaxSize, Spacing } from '../../assets/styles/Common.styles';
 
 export const AddExperienceForm = styled.form`
   width: 700px;
+  max-width: 90vw;
   display: flex;
   flex-direction: column;
   gap: ${Spacing.s15};
@@ -20,7 +21,11 @@ export const AddExperienceForm = styled.form`
 export const AddExperienceDates = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: ${Spacing.s15};
+  grid-gap: ${Spacing.s15};
+
+  @media (max-width: ${MediaMaxSize.mobile}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const AddExperienceActions = styled.div`

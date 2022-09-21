@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -36,18 +36,24 @@ export function AddSkill(props: AddSkillProps) {
     formState: { errors, isValid },
   } = useForm<FormValues>({ defaultValues, mode: 'onChange' });
 
-  const onSaveSkill = (data: FormValues) => {
-    dispatch(
-      props.skill ? editSkill({ ...data, uid }) : saveSkill({ ...data, uid })
-    );
-  };
+  const onSaveSkill = useCallback(
+    (data: FormValues) => {
+      dispatch(
+        props.skill ? editSkill({ ...data, uid }) : saveSkill({ ...data, uid })
+      );
+    },
+    [uid, props.skill]
+  );
 
-  const isNameUnique = (name: string) => {
-    const nameIsUnique = !skills.map((skill) => skill.name).includes(name);
+  const isNameUnique = useCallback(
+    (name: string) => {
+      const nameIsUnique = !skills.map((skill) => skill.name).includes(name);
 
-    if (props.skill) return;
-    if (!nameIsUnique) return 'Name already in usage';
-  };
+      if (props.skill) return;
+      if (!nameIsUnique) return 'Name already in usage';
+    },
+    [skills, props.skill]
+  );
 
   return (
     <div>

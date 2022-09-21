@@ -1,4 +1,4 @@
-import { LabelHTMLAttributes } from 'react';
+import { LabelHTMLAttributes, memo } from 'react';
 
 import { LabelContainer } from './Label.styles';
 
@@ -6,7 +6,7 @@ type LabelProps = LabelHTMLAttributes<HTMLLabelElement> & {
   text?: string;
 };
 
-export function Label(props: LabelProps) {
+export const Label = memo((props: LabelProps) => {
   return (
     <LabelContainer>
       <label {...props}>
@@ -15,4 +15,4 @@ export function Label(props: LabelProps) {
       </label>
     </LabelContainer>
   );
-}
+});

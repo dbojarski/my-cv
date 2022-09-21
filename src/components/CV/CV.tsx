@@ -1,5 +1,5 @@
 import ReactPDF, { Font } from '@react-pdf/renderer';
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
 
 import { Button, ButtonType } from '../Button/Button';
@@ -32,21 +32,21 @@ type CVProps = {
   pdf: ReactPDF.UsePDFInstance;
 };
 
-export function CV({ pdf }: CVProps) {
+export const CV = memo(({ pdf }: CVProps) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [pageTotal, setPageTotal] = useState(0);
 
-  const goToPreviousPage = () => {
+  const goToPreviousPage = useCallback(() => {
     if (pageNumber === 1) return;
 
     setPageNumber(pageNumber - 1);
-  };
+  }, [pageNumber]);
 
-  const goToNextPage = () => {
+  const goToNextPage = useCallback(() => {
     if (pageNumber === pageTotal) return;
 
     setPageNumber(pageNumber + 1);
-  };
+  }, [pageNumber]);
 
   return (
     <CVContainer>
@@ -83,4 +83,4 @@ export function CV({ pdf }: CVProps) {
       </Document>
     </CVContainer>
   );
-}
+});

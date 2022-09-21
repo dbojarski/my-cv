@@ -26,7 +26,7 @@ function AuthenticationContent() {
   );
 }
 
-export function Authentication() {
+export default function Authentication() {
   const user = useSelector(selectUser);
 
   return <>{user ? <Navigate to='/' /> : <AuthenticationContent />}</>;

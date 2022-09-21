@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -22,7 +22,7 @@ import {
   PersonalInformationHint,
 } from './PersonalInformation.styles';
 
-export function PersonalInformation() {
+export default function PersonalInformation() {
   const dispatch = useDispatch();
   const { uid } = useSelector(selectUser) as User;
   const personalInformation = useSelector(selectPersonalInformation);
@@ -37,9 +37,12 @@ export function PersonalInformation() {
   });
   const pending = useSelector(selectPending);
 
-  const onSavePersonalInformation = (data: Personal) => {
-    dispatch(updatePersonalInformation({ ...data, uid }));
-  };
+  const onSavePersonalInformation = useCallback(
+    (data: Personal) => {
+      dispatch(updatePersonalInformation({ ...data, uid }));
+    },
+    [uid]
+  );
 
   useEffect(() => {
     dispatch(fetchPersonalInformation(uid));

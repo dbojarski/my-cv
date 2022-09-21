@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AddSkill } from '../../../components/AddSkill/AddSkill';
@@ -20,7 +20,7 @@ import {
   SkillsList,
 } from './Skills.styles';
 
-export function Skills() {
+export default function Skills() {
   const { uid } = useSelector(selectUser) as User;
   const dispatch = useDispatch();
   const skills = useSelector(selectSkills);
@@ -28,15 +28,15 @@ export function Skills() {
   const [focusedSkill, focusSkill] = useState<Skill>();
   const pending = useSelector(selectPending);
 
-  const hideSkillForm = () => {
+  const hideSkillForm = useCallback(() => {
     focusSkill(undefined);
     setSkillFormVisibility(false);
-  };
+  }, []);
 
-  const editSkill = (skill: Skill) => {
+  const editSkill = useCallback((skill: Skill) => {
     focusSkill(skill);
     setSkillFormVisibility(true);
-  };
+  }, []);
 
   useEffect(() => {
     dispatch(fetchSkills(uid));

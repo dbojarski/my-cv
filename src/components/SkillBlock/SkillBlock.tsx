@@ -1,4 +1,5 @@
 import { User } from 'firebase/auth';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteSkill, Skill } from '../../store/profile';
@@ -40,7 +41,10 @@ export function SkillBlock({ skill, onEdit }: SkillBlockProps) {
   const dispatch = useDispatch();
   const { uid } = useSelector(selectUser) as User;
 
-  const onDeleteSkill = () => dispatch(deleteSkill({ name: skill.name, uid }));
+  const onDeleteSkill = useCallback(
+    () => dispatch(deleteSkill({ name: skill.name, uid })),
+    [uid]
+  );
 
   return (
     <SkillBlockContainer>

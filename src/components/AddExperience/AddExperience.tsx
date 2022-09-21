@@ -1,6 +1,6 @@
 import { addMonths, subMonths } from 'date-fns';
 import { User } from 'firebase/auth';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -50,17 +50,23 @@ export function AddExperience(props: AddSkillProps) {
   });
   const [from, to] = watch(['from', 'to']);
 
-  const onAddExperience = (data: FormValues) =>
-    dispatch(saveExperience({ ...(data as ExperienceItem<Date>), uid }));
+  const onAddExperience = useCallback(
+    (data: FormValues) =>
+      dispatch(saveExperience({ ...(data as ExperienceItem<Date>), uid })),
+    [uid]
+  );
 
-  const isExperienceNameUnique = (name: string) => {
-    const experienceIsUnique = !experiences
-      .map((experience) => experience.title)
-      .includes(name);
+  const isExperienceNameUnique = useCallback(
+    (name: string) => {
+      const experienceIsUnique = !experiences
+        .map((experience) => experience.title)
+        .includes(name);
 
-    if (props.experience) return;
-    if (!experienceIsUnique) return 'Title already in usage';
-  };
+      if (props.experience) return;
+      if (!experienceIsUnique) return 'Title already in usage';
+    },
+    [experiences, props.experience]
+  );
 
   return (
     <div>

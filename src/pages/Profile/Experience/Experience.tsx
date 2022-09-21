@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AddExperience } from '../../../components/AddExperience/AddExperience';
@@ -28,7 +28,7 @@ import {
   ExperienceDeleteIcon,
 } from './Experience.styles';
 
-export function Experience() {
+export default function Experience() {
   const dispatch = useDispatch();
   const { uid } = useSelector(selectUser) as User;
   const [experienceFormVisible, setExperienceFormVisibility] = useState(false);
@@ -37,18 +37,20 @@ export function Experience() {
   const [editMode, setEditMode] = useState(false);
   const pending = useSelector(selectPending);
 
-  const onDeleteExperience = () =>
-    dispatch(deleteExperience({ ...activeExperience, uid }));
+  const onDeleteExperience = useCallback(
+    () => dispatch(deleteExperience({ ...activeExperience, uid })),
+    [activeExperience]
+  );
 
-  const onEditExperience = () => {
+  const onEditExperience = useCallback(() => {
     setEditMode(true);
     setExperienceFormVisibility(true);
-  };
+  }, []);
 
-  const onExperienceModalClose = () => {
+  const onExperienceModalClose = useCallback(() => {
     setExperienceFormVisibility(false);
     setEditMode(false);
-  };
+  }, []);
 
   useEffect(() => {
     dispatch(fetchExperiences(uid));

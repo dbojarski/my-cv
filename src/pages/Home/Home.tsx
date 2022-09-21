@@ -1,6 +1,6 @@
 import { usePDF } from '@react-pdf/renderer';
 import { User } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -27,14 +27,20 @@ import { isAnyFieldEmpty } from '../../utils/common.utils';
 import { mapToOptions } from '../../utils/select/select.utils';
 import { CVActions, CVButtons, CVWrapper, HomeContainer } from './Home.styles';
 
-export function Home() {
+export default function Home() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser) as User;
   const experiences = useSelector(selectExperiences);
   const personal = useSelector(selectPersonalInformation) as Personal;
   const skills = useSelector(selectSkills);
-  const skillsOptions = mapToOptions(skills, 'name', 'name');
-  const experienceOptions = mapToOptions(experiences, 'title', 'title');
+  const skillsOptions = useMemo(
+    () => mapToOptions(skills, 'name', 'name'),
+    [skills]
+  );
+  const experienceOptions = useMemo(
+    () => mapToOptions(experiences, 'title', 'title'),
+    [experiences]
+  );
   const [chosenSkills, setChosenSkills] = useState<Skill[]>([]);
   const [chosenExperiences, setChosenExperiences] = useState<ExperienceItem[]>(
     []
@@ -53,17 +59,25 @@ export function Home() {
     refreshPDF();
   }, [personal]);
 
-  const filterSkills = (skillNames: string[]) => {
-    setChosenSkills(skills.filter((skill) => skillNames.includes(skill.name)));
-  };
+  const filterSkills = useCallback(
+    (skillNames: string[]) => {
+      setChosenSkills(
+        skills.filter((skill) => skillNames.includes(skill.name))
+      );
+    },
+    [skills]
+  );
 
-  const filterExperience = (experienceTitles: string[]) => {
-    setChosenExperiences(
-      experiences.filter((experience) =>
-        experienceTitles.includes(experience.title)
-      )
-    );
-  };
+  const filterExperience = useCallback(
+    (experienceTitles: string[]) => {
+      setChosenExperiences(
+        experiences.filter((experience) =>
+          experienceTitles.includes(experience.title)
+        )
+      );
+    },
+    [experiences]
+  );
 
   useEffect(() => {
     dispatch(fetchSkills(user.uid));

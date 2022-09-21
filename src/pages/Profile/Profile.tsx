@@ -7,7 +7,7 @@ import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { selectUser } from '../../store/user';
 import { ProfileContainer } from './Profile.styles';
 
-export function Profile() {
+export default function Profile() {
   const { displayName, email, photoURL } = useSelector(selectUser) as User;
 
   return (

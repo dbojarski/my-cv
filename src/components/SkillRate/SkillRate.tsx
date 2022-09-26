@@ -25,6 +25,7 @@ export const SkillRate = forwardRef(
                 type='radio'
                 id={bullet}
                 value={bullet}
+                data-testid='skill-rate-bullet'
               />
               <SkillRateBulletLabel htmlFor={bullet} />
             </Fragment>

@@ -13,7 +13,7 @@ export function SkillRateView(props: SkillRateViewProps) {
   return (
     <SkillRateViewContainer>
       {bullets.map((_, index) => (
-        <SkillRateViewBullet key={index} />
+        <SkillRateViewBullet data-testid='rateViewBullet' key={index} />
       ))}
     </SkillRateViewContainer>
   );

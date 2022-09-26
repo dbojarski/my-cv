@@ -6,7 +6,7 @@ export function mapToOptions<T = any>(
   valueKey: keyof T
 ): SelectItem[] {
   return items.map((item) => ({
-    text: item[textKey] as string,
+    text: String(item[textKey]),
     value: item[valueKey],
   }));
 }

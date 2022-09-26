@@ -22,17 +22,17 @@ type SkillBlockProps = {
   onEdit: (skill: Skill) => void;
 };
 
-export function SkillBlockExperience({
+function SkillBlockExperience({
   experienceInMonths,
 }: SkillBlockExperienceProps) {
   const experience = Number(experienceInMonths);
   const experienceDetails = [Math.floor(experience / 12), experience % 12];
 
   return (
-    <small>
-      {experienceDetails.map(
-        (detail, index) => detail > 0 && ` ${detail}${index ? 'm' : 'y'}`
-      )}
+    <small data-testid='skill-experience'>
+      {experienceDetails
+        .map((detail, index) => detail > 0 && `${detail}${index ? 'm' : 'y'}`)
+        .join(' ')}
     </small>
   );
 }

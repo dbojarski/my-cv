@@ -10,7 +10,7 @@ export function Datepicker(props: DatepickerProps) {
   const { label, ...datePickerProps } = props;
 
   return (
-    <Label text={props.label}>
+    <Label text={props.label} data-testid='datepicker'>
       <ReactDatePicker
         {...datePickerProps}
         onChange={props.onChange}
